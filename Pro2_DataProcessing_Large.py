@@ -17,6 +17,8 @@ spark = SparkSession.builder \
 # Read large CSV file
 df = spark.read.csv('demyst_input_dataset.csv', header=True, inferSchema=True)
 
+# Increase number of partitions for parallel processing
+df = df.repartition(10)
 # Create UDF to mask sensitive data using Faker 
 def anonymize_name():
     faker = Factory.create()
